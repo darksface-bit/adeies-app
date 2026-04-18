@@ -2,24 +2,33 @@
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <title>Διαχείριση Αδειών</title>
+    <title>Final Debug</title>
     <script src="coi-serviceworker.js"></script>
     <style>
-        /* Αν η οθόνη γίνει γκρι, τότε το CSS δουλεύει. 
-           Αν το κέντρο γίνει κόκκινο, το canvas είναι εκεί. */
-        body, html { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            background-color: #333333; overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-        }
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #222; overflow: hidden; }
         #ComposeTarget { 
-            width: 100vw; height: 100vh; 
-            background-color: #ff0000; /* Κόκκινο για test */
+            width: 100vw !important; 
+            height: 100vh !important; 
+            display: block; 
+            background-color: red; /* Αν το δεις κόκκινο, το canvas είναι οκ */
         }
     </style>
 </head>
 <body>
     <canvas id="ComposeTarget"></canvas>
-    <script type="module" src="app.js"></script>
+
+    <script type="module">
+        const canvas = document.getElementById("ComposeTarget");
+        if (canvas) {
+            console.log("✅ Το Canvas βρέθηκε με ID 'ComposeTarget'");
+            console.log("Διαστάσεις Canvas:", canvas.clientWidth, "x", canvas.clientHeight);
+        } else {
+            console.error("❌ ΤΟ CANVAS ΔΕΝ ΒΡΕΘΗΚΕ! Ελέγξτε το ID.");
+        }
+
+        import("./app.js").then(() => {
+            console.log("🚀 Το app.js ξεκίνησε!");
+        }).catch(err => console.error("Σφάλμα app.js:", err));
+    </script>
 </body>
 </html>
